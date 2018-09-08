@@ -13,7 +13,7 @@
             <p:commandButton value="Mudar para inserir" update="@form" action="#{carroBean.changeStateToInsert()}"></p:commandButton>
             <p:commandButton value="Mudar para ediar" update="@form" action="#{carroBean.changeStateToEdit()}"></p:commandButton>
             <p:commandButton value="Mudar para buscar" update="@form" action="#{carroBean.changeStateToSearch()}"></p:commandButton>
-
+            <div></div><br/><br/>
             <h:outputText value="Inserir" rendered="#{carroBean.isInsert() == true}"></h:outputText>
             <h:outputText value="Editar" rendered="#{carroBean.isEdit() == true}"></h:outputText>
             <h:outputText value="Buscar" rendered="#{carroBean.isSearch() == true}"></h:outputText>

@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--@author LUCAS FERNANDO DE ASSIS-->
+<!--Data de criação - 08/09/2018-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="bean" required="true" shortDescription="Uma classe qualquer que extenda a 'CrudBean'"></cc:attribute>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <br/>   
+        <p:toolbar>
+            <p:toolbarGroup>
+                <p:commandButton value="Novo" icon="ui-icon-document" action="#{cc.attrs.bean.newEntity()}" update="@form"></p:commandButton>
+                <p:commandButton value="Salvar" icon="ui-icon-disk" action="#{cc.attrs.bean.save()}" disabled="#{cc.attrs.bean.search == true}" update="@form"></p:commandButton>
+                <p:commandButton value="Buscar" icon="ui-icon-search" action="#{cc.attrs.bean.get()}" update="@form"></p:commandButton>
+            </p:toolbarGroup>
+            <p:toolbarGroup align="right">
+                <cc:insertChildren></cc:insertChildren>
+            </p:toolbarGroup>
+        </p:toolbar>
+        <br/><br/>
+    </cc:implementation>
+</html>

@@ -6,7 +6,8 @@
              xmlns:h="http://xmlns.jcp.org/jsf/html"
              xmlns:p="http://primefaces.org/ui"
              xmlns:f="http://java.sun.com/jsf/core"
-             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"             
+             xmlns:sc="http://xmlns.jcp.org/jsf/composite/sccomp"
              template="template.xhtml">
     <ui:define name="corpo">
         <h:form>
@@ -18,12 +19,10 @@
 
                     <h:outputLabel value="Senha"></h:outputLabel>
                     <p:inputText value="#{usuarioBean.entity.senha}"></p:inputText>                   
-                </p:panelGrid>
-                <br/>                
-                <p:commandButton value="Novo" action="#{usuarioBean.newEntity()}" update="@form"></p:commandButton>
-                <p:commandButton value="Salvar" action="#{usuarioBean.save()}" disabled="#{usuarioBean.search == true}" update="@form"></p:commandButton>
-                <p:commandButton value="Buscar" action="#{usuarioBean.get()}" update="@form"></p:commandButton>
-                <br/><br/>
+                </p:panelGrid>                
+                <sc:toolbarCrud bean="#{usuarioBean}">
+                    <h:outputLabel>Lucas 09/2018</h:outputLabel>
+                </sc:toolbarCrud>
                 <p:dataTable value="#{usuarioBean.entities}" 
                              var="usuario" 
                              emptyMessage="Nenhum usuário encontrado"
