@@ -2,6 +2,7 @@
 //Data de criação - 07/09/2018
 package br.mycompany.jsf.carros.utils;
 
+import br.mycompany.jsf.carros.utils.exceptions.ErroSistema;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -10,29 +11,29 @@ public class FabricaConexao {
 
     private static Connection conexao;
 
-    public static Connection getConexao() {
+    public static Connection getConexao() throws ErroSistema {
         if (conexao == null) {
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                conexao = DriverManager.getConnection("jdbc:sqlserver://localhost;database=CarrosDB;integratedSecurity=true;");
+                conexao = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=CarrosDB;", "sa", "a");
             } catch (SQLException ex) {
-                Erro.exibe(ex);
+                throw new ErroSistema("Não foi possível conectar ao banco de dados", ex);
             } catch (ClassNotFoundException ex) {
-                Erro.exibe(ex);
+                throw new ErroSistema("Driver do banco de dados não foi encontrado", ex);
             }
         }
 
         return conexao;
     }
 
-    public static void fecharConexao() {
+    public static void fecharConexao() throws ErroSistema {
         if (conexao != null) {
             try {
                 conexao.close();
+                conexao = null;
             } catch (SQLException ex) {
-                Erro.exibe(ex);
+                throw new ErroSistema("Não foi possível encerrar a conexão com o banco de dados", ex);
             }
-            conexao = null;
         }
     }
 }

@@ -41,7 +41,7 @@
                     </p:column>                   
                     <p:column>
                         <p:commandButton value="Editar" action="#{usuarioBean.put(usuario)}" update="@form"></p:commandButton>
-                        <p:commandButton value="Excluir" action="#{usuarioBean.delete(usuario)}" update="@form"></p:commandButton>
+                        <p:commandButton value="Excluir" action="#{usuarioBean.delete(usuario.id)}" update="@form"></p:commandButton>
                     </p:column>
                 </p:dataTable>
             </p:fieldset>

@@ -11,12 +11,14 @@
     </h:head>
     <h:body>
         <h1>Sistema de Carros</h1>
-        <p:menubar>
-            <p:menuitem value="Home" url="index.jsf"></p:menuitem>
-            <p:menuitem value="Gerenciar Carros" url="gerenciar-carro.jsf"></p:menuitem>
-            <p:menuitem value="Gerenciar Usuários" url="gerenciar-usuario.jsf"></p:menuitem>
-            <p:menuitem value="Estado" url="controle-tela.jsf"></p:menuitem>
-        </p:menubar>
+        <h:form>
+            <p:menubar>
+                <p:menuitem value="Home" url="index.jsf"></p:menuitem>
+                <p:menuitem value="Gerenciar Carros" url="gerenciar-carro.jsf"></p:menuitem>
+                <p:menuitem value="Gerenciar Usuários" url="gerenciar-usuario.jsf"></p:menuitem>
+                <p:menuitem value="Estado" url="controle-tela.jsf"></p:menuitem>
+            </p:menubar>
+        </h:form>
         <hr/>
         <ui:insert name="corpo"></ui:insert>
     </h:body>

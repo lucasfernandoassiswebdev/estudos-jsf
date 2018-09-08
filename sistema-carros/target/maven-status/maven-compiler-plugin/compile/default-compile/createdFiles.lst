@@ -1,7 +1,11 @@
 br\mycompany\jsf\carros\utils\FabricaConexao.class
+com\mycompany\jsf\carros\beans\UsuarioBean.class
 com\mycompany\jsf\carros\dao\interfaces\CrudDAO.class
 com\mycompany\jsf\carros\beans\CrudBean.class
 com\mycompany\jsf\carros\dao\CarroDAO.class
-br\mycompany\jsf\carros\utils\Erro.class
 com\mycompany\jsf\carros\entidades\Carro.class
 com\mycompany\jsf\carros\beans\CarroBean.class
+com\mycompany\jsf\carros\dao\UsuarioDAO.class
+br\mycompany\jsf\carros\utils\exceptions\ErroSistema.class
+br\mycompany\jsf\carros\utils\Messages.class
+com\mycompany\jsf\carros\entidades\Usuario.class

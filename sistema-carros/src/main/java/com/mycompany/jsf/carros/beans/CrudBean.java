@@ -2,11 +2,11 @@
 //Data de criação - 07/09/2018
 package com.mycompany.jsf.carros.beans;
 
-import br.mycompany.jsf.carros.utils.Erro;
+import br.mycompany.jsf.carros.utils.Messages;
+import br.mycompany.jsf.carros.utils.exceptions.ErroSistema;
 import com.mycompany.jsf.carros.dao.interfaces.CrudDAO;
 import java.util.List;
 import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 
 public abstract class CrudBean<T, D extends CrudDAO> {
 
@@ -19,25 +19,25 @@ public abstract class CrudBean<T, D extends CrudDAO> {
         changeStateToInsert();
     }
 
-    public void save() throws Erro {
+    public void save() throws ErroSistema {
         getDao().save(entity);
         entity = createNewEntity();
-        addMessage("Salvo com sucesso", FacesMessage.SEVERITY_INFO);
+        Messages.addMessage("Sucesso!", "Salvo com sucesso!", FacesMessage.SEVERITY_INFO);
         changeStateToSearch();
     }
 
-    public void edit(T entity) {
+    public void put(T entity) {
         this.entity = entity;
         changeStateToEdit();
     }
 
-    public void delete(T entitity) throws Erro {
-        getDao().delete(entity);
-        entities.remove(entitity);
-        addMessage("Deletado com sucesso", FacesMessage.SEVERITY_INFO);
+    public void delete(int id) throws ErroSistema {
+        getDao().delete(id);
+        entities.remove(id);
+        Messages.addMessage("Sucesso!", "Deletado com sucesso", FacesMessage.SEVERITY_INFO);
     }
 
-    public void get() {
+    public void get() throws ErroSistema {
         if (!isSearch()) {
             changeStateToSearch();
             return;
@@ -46,13 +46,8 @@ public abstract class CrudBean<T, D extends CrudDAO> {
         entities = getDao().get();
 
         if (entities == null || entities.isEmpty()) {
-            addMessage("Não há registros para exibir", FacesMessage.SEVERITY_WARN);
+            Messages.addMessage("Nenhum dado encontrado!", "Não há registros para exibir", FacesMessage.SEVERITY_WARN);
         }
-    }
-
-    public void addMessage(String message, FacesMessage.Severity type) {
-        FacesMessage fm = new FacesMessage(type, message, null);
-        FacesContext.getCurrentInstance().addMessage(null, fm);        
     }
 
     public abstract D getDao();
@@ -86,7 +81,7 @@ public abstract class CrudBean<T, D extends CrudDAO> {
         screen_state = "search";
     }
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Getters e Setters">
     public T getEntity() {
         return entity;

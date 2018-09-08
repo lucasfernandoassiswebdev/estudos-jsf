@@ -2,7 +2,7 @@
 //Data de criação - 07/09/2018
 package com.mycompany.jsf.carros.dao;
 
-import br.mycompany.jsf.carros.utils.Erro;
+import br.mycompany.jsf.carros.utils.exceptions.ErroSistema;
 import br.mycompany.jsf.carros.utils.FabricaConexao;
 import com.mycompany.jsf.carros.dao.interfaces.CrudDAO;
 import com.mycompany.jsf.carros.entidades.Carro;
@@ -14,10 +14,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarroDAO implements CrudDAO<Carro>{
+public class CarroDAO implements CrudDAO<Carro> {
 
     @Override
-    public void save(Carro carro) {
+    public void save(Carro carro) throws ErroSistema {
         Connection conexao = FabricaConexao.getConexao();
         try {
             String comando = carro.getId() == null
@@ -34,12 +34,12 @@ public class CarroDAO implements CrudDAO<Carro>{
             ps.executeUpdate();
             FabricaConexao.fecharConexao();
         } catch (SQLException ex) {
-            Erro.exibe(ex);
+            throw new ErroSistema("Erro ao salvar carro", ex);
         }
     }
 
     @Override
-    public List<Carro> get() {
+    public List<Carro> get() throws ErroSistema {
         Connection conexao = FabricaConexao.getConexao();
         List<Carro> lista_carros = new ArrayList();
         try {
@@ -57,21 +57,21 @@ public class CarroDAO implements CrudDAO<Carro>{
             }
             FabricaConexao.fecharConexao();
         } catch (SQLException ex) {
-            Erro.exibe(ex);
+            throw new ErroSistema("Erro ao listar carros",ex);
         }
 
         return lista_carros;
     }
 
     @Override
-    public void delete(Carro carro) throws Erro {
+    public void delete(int id_carro) throws ErroSistema {
         try {
             Connection conexao = FabricaConexao.getConexao();
             PreparedStatement ps = conexao.prepareStatement("DELETE FROM CARRO WHERE ID = ?");
-            ps.setInt(1, carro.getId());
+            ps.setInt(1, id_carro);
             ps.execute();
-        } catch (Exception ex) {
-            Erro.exibe(ex);
+        } catch (ErroSistema | SQLException ex) {
+            throw new ErroSistema("Erro ao excluir carro",ex);
         }
     }
 }
