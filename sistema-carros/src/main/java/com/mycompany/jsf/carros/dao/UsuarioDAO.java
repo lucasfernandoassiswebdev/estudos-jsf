@@ -43,7 +43,8 @@ public class UsuarioDAO implements CrudDAO<Usuario> {
             PreparedStatement ps = conexao.prepareStatement("DELETE FROM USUARIO WHERE ID = ?");
             ps.setInt(1, id_usuario);
             ps.execute();
-        } catch (Exception ex) {
+            FabricaConexao.fecharConexao();
+        } catch (ErroSistema | SQLException ex) {
             throw new ErroSistema("Erro ao excluir usuário", ex);
         }
     }

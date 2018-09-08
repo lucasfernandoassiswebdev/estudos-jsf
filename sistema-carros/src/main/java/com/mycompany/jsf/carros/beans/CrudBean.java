@@ -33,7 +33,7 @@ public abstract class CrudBean<T, D extends CrudDAO> {
 
     public void delete(int id) throws ErroSistema {
         getDao().delete(id);
-        entities.remove(id);
+        get();
         Messages.addMessage("Sucesso!", "Deletado com sucesso", FacesMessage.SEVERITY_INFO);
     }
 

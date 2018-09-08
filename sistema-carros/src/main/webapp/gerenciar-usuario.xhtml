@@ -10,6 +10,7 @@
              template="template.xhtml">
     <ui:define name="corpo">
         <h:form>
+            <p:messages autoUpdate="true" showDetail="true"></p:messages>
             <p:fieldset legend="Usuários" toggleable="true" toggleSpeed="100">            
                 <p:panelGrid columns="2" rendered="#{usuarioBean.search == false}">
                     <h:outputLabel value="Login"></h:outputLabel>
@@ -31,7 +32,7 @@
                               sortBy="#{usuario.login}" 
                               filterBy="#{usuario.login}" 
                               filterMatchMode="contains">
-                        <h:outputText value="#{usuario.modelo}"></h:outputText>
+                        <h:outputText value="#{usuario.login}"></h:outputText>
                     </p:column>
                     <p:column headerText="Senha" 
                               sortBy="#{usuario.senha}" 

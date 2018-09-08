@@ -71,6 +71,7 @@ public class CarroDAO implements CrudDAO<Carro> {
             PreparedStatement ps = conexao.prepareStatement("DELETE FROM CARRO WHERE ID = ?");
             ps.setInt(1, id_carro);
             ps.execute();
+            FabricaConexao.fecharConexao();
         } catch (ErroSistema | SQLException ex) {
             throw new ErroSistema("Erro ao excluir carro",ex);
         }
