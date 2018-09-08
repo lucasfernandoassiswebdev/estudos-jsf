@@ -21,15 +21,16 @@ public class CarroDAO implements CrudDAO<Carro> {
         Connection conexao = FabricaConexao.getConexao();
         try {
             String comando = carro.getId() == null
-                    ? "INSERT INTO CARRO(MODELO, FABRICANTE, COR, ANO) VALUES(?,?,?,?)"
-                    : "UPDATE CARRO SET MODELO = ?, FABRICANTE = ?, COR = ?, ANO = ? WHERE ID = ?";
+                    ? "INSERT INTO CARRO(MODELO, FABRICANTE, COR, ANO, MARCA) VALUES(?,?,?,?,?)"
+                    : "UPDATE CARRO SET MODELO = ?, FABRICANTE = ?, COR = ?, ANO = ?, MARCA = ? WHERE ID = ?";
             PreparedStatement ps = conexao.prepareStatement(comando);
             ps.setString(1, carro.getModelo());
             ps.setString(2, carro.getFabricante());
             ps.setString(3, carro.getCor());
             ps.setDate(4, new Date(carro.getAno().getTime()));
+            ps.setString(5, carro.getMarca());
             if (carro.getId() != null) {
-                ps.setInt(5, carro.getId());
+                ps.setInt(6, carro.getId());
             }
             ps.executeUpdate();
             FabricaConexao.fecharConexao();

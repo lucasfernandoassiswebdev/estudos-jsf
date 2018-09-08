@@ -15,7 +15,7 @@ public class FabricaConexao {
         if (conexao == null) {
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                conexao = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=CarrosDB;", "sa", "a");
+                conexao = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=CarrosDB;", "sa", "a");
             } catch (SQLException ex) {
                 throw new ErroSistema("Não foi possível conectar ao banco de dados", ex);
             } catch (ClassNotFoundException ex) {
